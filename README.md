@@ -6,6 +6,19 @@ A recruiter-ready **business and operations analytics** project that turns suppo
 
 > **Recruiter takeaway:** this project demonstrates how I move from operational data to KPIs, segmentation, root-cause questions, and practical improvement priorities.
 
+## Interactive Dashboard
+
+Run the project as an interactive local dashboard:
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+The dashboard lets users filter by **channel** and **priority**, then explore ticket volume, SLA attainment, response/resolution performance, CSAT, and escalation patterns. The app automatically generates the fixed-seed synthetic dataset if it is not present.
+
+For a hosted version, deploy `app.py` on any Streamlit-compatible hosting service.
+
 ## The Business Problem
 
 Support teams can look healthy on average while a smaller group of high-priority, slow, escalated, or reopened cases creates most of the operational pain. This project analyzes those patterns instead of relying on a single average.
@@ -78,7 +91,7 @@ Operational Decision Framework
 
 ## Tech Stack
 
-**Python · pandas · NumPy · SQL · Matplotlib · Git/GitHub · GitHub Actions · pytest**
+**Python · pandas · NumPy · SQL · Matplotlib · Git/GitHub · GitHub Actions · pytest · Streamlit**
 
 ## Reproduce It
 
@@ -95,6 +108,7 @@ pytest -q
 
 | Folder | Purpose |
 |---|---|
+| `app.py` | Interactive Streamlit dashboard |
 | `reports/` | Executive support interpretation |
 | `visualizations/` | Recruiter-visible charts |
 | `sql/` | Reusable operational queries |
