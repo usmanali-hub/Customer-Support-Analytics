@@ -1,75 +1,69 @@
 # Customer Support Analytics
 
-## Turning support operations data into decisions
+## Support operations → measurable decisions
 
-A reproducible business analytics project that evaluates customer-support operations through **Python, SQL, KPI analysis, segmentation, and visualization**.
+A reproducible business analytics project that evaluates customer-support operations through **Python, SQL, KPI analysis, service-level metrics, segmentation, and visualization**.
 
-The goal is not simply to report how many tickets arrived. The analysis is designed to answer the operational questions a support leader actually needs to make decisions: **where demand is concentrated, where service levels break down, what drives escalations and reopenings, and how operational performance connects to customer satisfaction.**
+### Why this project matters
+
+The analysis goes beyond ticket counts. It connects **demand → response → resolution → escalation → customer satisfaction** to identify where an operations team should investigate or improve.
 
 ## Business Questions
 
-- How does ticket demand change over time and across support channels?
-- Which priorities and issue types create the greatest operational load?
-- Are first-response and resolution SLAs being met?
-- Where are escalations and reopened cases concentrated?
-- Which teams or channels show slower response or resolution performance?
-- How does service performance relate to CSAT?
-- Where should support operations focus improvement efforts first?
+- Where is ticket demand concentrated by month, channel, priority, and issue type?
+- Are service-level targets being met?
+- Does the long tail of response or resolution time tell a different story than averages?
+- Where are escalations and reopenings concentrated?
+- Which teams or channels show weaker operational performance?
+- How does SLA performance relate to CSAT?
+- Which issue categories should receive operational attention first?
 
 ## Analytical Workflow
 
 ```text
-Synthetic Support Data
+Synthetic Support Data → Validation & Cleaning
         ↓
-Data Validation & Cleaning
+KPI Calculation → P90 Service Metrics
         ↓
-KPI Calculation
+SLA / CSAT Analysis → Escalation Root-Cause Segmentation
         ↓
-Segmentation & Trend Analysis
-        ↓
-SQL Business Queries
-        ↓
-Visual Reporting
-        ↓
-Operational Findings & Recommendations
+SQL → Visual Reporting → Operational Decision Framework
 ```
 
-## Key KPIs
+## Advanced Analytics
 
 | Area | Metrics |
 |---|---|
-| Demand | Ticket volume, backlog, monthly trend |
-| Service | First-response time, resolution time, SLA attainment |
-| Customer | CSAT, reopen rate |
-| Operations | Escalation rate, workload by team/channel |
-| Segmentation | Priority, issue type, channel, team |
+| Demand | Ticket volume, monthly trend, segmentation |
+| Service | Average/median/P90 first response and resolution |
+| SLA | Overall and high-priority SLA attainment |
+| Customer | Average CSAT, low-CSAT rate |
+| Operations | Escalation rate, reopen rate |
+| Root cause | Escalation by priority and issue type |
+| Relationship | CSAT grouped by SLA status |
+
+P90 metrics are included deliberately because averages can hide long-running customer cases.
 
 ## Tech Stack
 
-- **Python** — analysis and automation
-- **pandas / NumPy** — data preparation and KPI calculations
-- **SQL** — operational and segmentation queries
-- **Matplotlib** — analytical visualization
-- **Git / GitHub** — version control and reproducibility
+**Python · pandas · NumPy · SQL · Matplotlib · Git/GitHub · GitHub Actions**
 
 ## Repository Structure
 
 ```text
-├── data/                 # Dataset documentation; generated CSVs are ignored
-├── docs/                 # Methodology and analytical findings
-├── notebooks/            # Notebook-style analytical walkthrough
-├── reports/              # Executive interpretation and recommendations
-├── sql/                  # Business analysis queries
-├── src/                  # Data generation, cleaning, analysis and visualization
-├── visualizations/       # Documentation for generated charts
-├── .gitignore
-├── requirements.txt
-└── README.md
+├── data/                 # Synthetic dataset documentation
+├── docs/                 # Methodology, dictionary, decision framework
+├── notebooks/            # Analytical walkthrough
+├── reports/              # KPI and executive outputs
+├── sql/                  # Operational analysis queries
+├── src/                  # Generation, cleaning, analysis, visualization
+├── visualizations/       # Chart documentation
+├── .github/workflows/    # Automated quality checks
+├── README.md
+└── requirements.txt
 ```
 
 ## Reproducibility
-
-Run the complete pipeline with:
 
 ```bash
 pip install -r requirements.txt
@@ -79,14 +73,20 @@ python src/support_analysis.py
 python src/create_visualizations.py
 ```
 
-Generated CSV and PNG outputs are intentionally excluded from Git. The repository contains the code, methodology, SQL, and reporting layer required to reproduce the analysis.
+Generated CSV and PNG outputs are intentionally excluded from Git. GitHub Actions runs Python compilation checks on pushes and pull requests.
 
-## Data Integrity Note
+## Operational Decision Framework
 
-The dataset is **synthetic** and exists solely for portfolio demonstration. It does not contain private customer records, employer data, or production support information. Results should therefore be interpreted as an analytical demonstration rather than as claims about a real support organization.
+**Demand:** Find where workload is concentrated.
 
-## What This Project Demonstrates
+**Service:** Compare SLA attainment with P90 response and resolution times.
 
-This project demonstrates the ability to move from **raw operational data → validated metrics → segmented analysis → business interpretation** rather than stopping at descriptive charts.
+**Customer:** Compare CSAT and low-CSAT rates alongside service outcomes.
 
-It is designed to showcase practical Data Analyst skills in **customer operations, KPI reporting, SLA analysis, root-cause-oriented segmentation, SQL, Python, and decision-focused communication**.
+**Complexity:** Identify issue types and priorities with elevated escalation or reopen rates.
+
+**Action:** Prioritize high-volume segments with measurable service or customer-impact problems.
+
+## Data Integrity
+
+The dataset is **synthetic** and exists solely for portfolio demonstration. It contains no private customer records, employer data, or production support information. Results should be interpreted as an analytical demonstration rather than claims about a real support organization.
