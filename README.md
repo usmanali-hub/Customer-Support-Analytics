@@ -2,15 +2,39 @@
 
 ## Support operations → measurable decisions
 
-A recruiter-ready, reproducible business analytics project that evaluates customer-support operations through **Python, SQL, KPI analysis, service-level metrics, segmentation, and visualization**.
+A recruiter-ready **business and operations analytics** project that turns support-ticket data into measurable insights across workload, service levels, customer experience, and operational complexity.
 
-> **Portfolio focus:** connecting workload, service performance, customer experience, and operational complexity into actionable questions.
+> **Recruiter takeaway:** this project demonstrates how I move from operational data to KPIs, segmentation, root-cause questions, and practical improvement priorities.
 
-## Executive Dashboard
+## The Business Problem
 
-See the recruiter-facing interpretation layer: **[Executive Support Dashboard](reports/executive_dashboard.md)**.
+Support teams can look healthy on average while a smaller group of high-priority, slow, escalated, or reopened cases creates most of the operational pain. This project analyzes those patterns instead of relying on a single average.
 
-### Visual Analysis
+### Questions the analysis answers
+
+- Where is ticket demand concentrated by month, channel, priority, and issue type?
+- Are service-level targets being met?
+- Does P90 response/resolution time reveal a long tail hidden by averages?
+- Where are escalations and reopenings concentrated?
+- Which channels or teams show weaker operational performance?
+- How does SLA performance relate to CSAT?
+- Which issue categories deserve attention first?
+
+## Executive View
+
+| Lens | Measures | Decision question |
+|---|---|---|
+| **Demand** | Ticket volume + trend | Where is workload concentrated? |
+| **Responsiveness** | Avg / median / P90 first response | Are slow cases hidden by averages? |
+| **Resolution** | Avg / median / P90 resolution | Where does handling slow down? |
+| **SLA** | Overall + priority attainment | Which commitments are at risk? |
+| **Customer** | CSAT + low-CSAT rate | Where is customer experience weakest? |
+| **Complexity** | Escalation + reopen rate | Which cases create repeat work? |
+| **Root cause** | Priority + issue type | Which segments need attention? |
+
+## Visual Analysis
+
+The key charts are visible directly on GitHub:
 
 ![Monthly Support Ticket Volume](visualizations/monthly_ticket_volume.svg)
 
@@ -20,48 +44,43 @@ See the recruiter-facing interpretation layer: **[Executive Support Dashboard](r
 
 ![Median Resolution Time by Issue Type](visualizations/resolution_by_issue.svg)
 
-These charts are generated from the project's fixed-seed synthetic support dataset and committed as SVG so they render directly on GitHub.
+These visuals are generated from the project's fixed-seed synthetic dataset and committed as SVG so a recruiter can inspect the analytical output without opening the source code.
 
-## Analyst Snapshot
-
-| Capability | Demonstrated here |
-|---|---|
-| Data preparation | Validation, cleaning, type handling |
-| KPI analysis | Volume, SLA, response, resolution, CSAT |
-| Service analytics | Average, median, and P90 metrics |
-| Segmentation | Channel, priority, issue type, team, month |
-| Root-cause analysis | Escalation and reopen concentration |
-| SQL | Reusable operational analysis queries |
-| Communication | Executive support dashboard and decision framework |
-| Reproducibility | Scripted pipeline + tests + GitHub Actions |
-
-## Business Questions
-
-- Where is ticket demand concentrated by month, channel, priority, and issue type?
-- Are service-level targets being met?
-- Does the long tail of response or resolution time tell a different story than averages?
-- Where are escalations and reopenings concentrated?
-- Which teams or channels show weaker operational performance?
-- How does SLA performance relate to CSAT?
-- Which issue categories should receive operational attention first?
+**[Open the Executive Support Dashboard](reports/executive_dashboard.md)** for the KPI and operational decision framework.
 
 ## Analytical Workflow
 
 ```text
-Synthetic Support Data → Validation & Cleaning
+Synthetic Support Data
+        ↓
+Validation & Cleaning
         ↓
 KPI Calculation → P90 Service Metrics
         ↓
-SLA / CSAT Analysis → Escalation Root-Cause Segmentation
+SLA / CSAT Analysis → Escalation & Reopen Segmentation
         ↓
-SQL → Visual Reporting → Operational Decision Framework
+SQL + Visual Reporting
+        ↓
+Operational Decision Framework
 ```
+
+## What This Demonstrates
+
+**KPI analysis** — volume, response time, resolution time, SLA, CSAT.
+
+**Service analytics** — average, median, and P90 metrics to expose long-tail cases.
+
+**Segmentation** — channel, priority, issue type, team, and month.
+
+**Root-cause analysis** — escalation and reopen concentration.
+
+**Business communication** — `Demand → service → customer outcome → root cause → operational action`.
 
 ## Tech Stack
 
 **Python · pandas · NumPy · SQL · Matplotlib · Git/GitHub · GitHub Actions · pytest**
 
-## Reproducibility
+## Reproduce It
 
 ```bash
 pip install -r requirements.txt
@@ -72,15 +91,24 @@ python src/create_visualizations.py
 pytest -q
 ```
 
-The synthetic dataset uses a fixed random seed. The visualization script now generates SVG outputs that are versioned in Git so the portfolio's visual layer is visible on GitHub.
+## Repository Map
+
+| Folder | Purpose |
+|---|---|
+| `reports/` | Executive support interpretation |
+| `visualizations/` | Recruiter-visible charts |
+| `sql/` | Reusable operational queries |
+| `src/` | Data generation and analytics pipeline |
+| `tests/` | Automated validation |
+| `.github/workflows/` | CI quality checks |
 
 ## Data Integrity
 
-The dataset is **synthetic** and exists solely for portfolio demonstration. It contains no private customer records, employer data, or production support information. Results should be interpreted as an analytical demonstration rather than claims about a real support organization.
+The dataset is **synthetic** and exists solely for portfolio demonstration. It contains no private customer records, employer data, or production support information. Results demonstrate analytical methodology rather than real-company performance.
 
 ## Portfolio
 
-Part of a three-project Data Analyst portfolio:
+Part of a three-project analytics portfolio:
 
 - **Macro Market Intelligence** — economic and market context
 - **Trading Risk & Performance Analytics** — financial risk and performance
