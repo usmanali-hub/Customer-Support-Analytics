@@ -1,37 +1,38 @@
-# Customer Support Analytics
+# Customer Support Intelligence
 
-## Support operations → measurable decisions
+## Support operations → evidence → business decisions
 
-A recruiter-ready **business and operations analytics** project that turns support-ticket data into measurable insights across workload, service levels, customer experience, and operational complexity.
+A recruiter-ready **business and operations analytics** project that turns support-ticket data into measurable insights across demand, service levels, customer experience, operational complexity, backlog risk, and scenario-based business impact.
 
-> **Recruiter takeaway:** this project demonstrates how I move from operational data to KPIs, segmentation, root-cause questions, and practical improvement priorities.
+> **Recruiter takeaway:** this project demonstrates how I move from operational data to KPIs, segment the evidence, test plausible explanations, quantify scenarios, and translate findings into practical investigation priorities.
 
 ## Interactive Dashboard
 
-Run the project as an interactive local dashboard:
+Run the project locally:
 
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The dashboard lets users filter by **channel** and **priority**, then explore ticket volume, SLA attainment, response/resolution performance, CSAT, and escalation patterns. The app automatically generates the fixed-seed synthetic dataset if it is not present.
+The dashboard supports filters for **channel, priority, issue type, and agent team**. It exposes executive health KPIs, operational risk signals, backlog aging, SLA/CSAT association, and an explicitly labeled escalation-cost scenario.
 
 For a hosted version, deploy `app.py` on any Streamlit-compatible hosting service.
 
 ## The Business Problem
 
-Support teams can look healthy on average while a smaller group of high-priority, slow, escalated, or reopened cases creates most of the operational pain. This project analyzes those patterns instead of relying on a single average.
+Support teams can look healthy on average while a smaller group of slow, high-priority, escalated, or reopened cases creates most of the operational pain. This project goes beyond headline averages by examining long-tail service performance, segment concentration, backlog aging, customer outcomes, and scenario-based operational impact.
 
 ### Questions the analysis answers
 
 - Where is ticket demand concentrated by month, channel, priority, and issue type?
 - Are service-level targets being met?
-- Does P90 response/resolution time reveal a long tail hidden by averages?
+- Does P90 service time reveal a long tail hidden by averages?
 - Where are escalations and reopenings concentrated?
-- Which channels or teams show weaker operational performance?
-- How does SLA performance relate to CSAT?
-- Which issue categories deserve attention first?
+- Which segments combine meaningful volume with service risk?
+- Is lower CSAT associated with missed SLA in the observed data?
+- How old are open/pending cases at the dataset observation date?
+- What would a hypothetical reduction in escalations imply for workload and cost under explicit assumptions?
 
 ## Executive View
 
@@ -39,11 +40,23 @@ Support teams can look healthy on average while a smaller group of high-priority
 |---|---|---|
 | **Demand** | Ticket volume + trend | Where is workload concentrated? |
 | **Responsiveness** | Avg / median / P90 first response | Are slow cases hidden by averages? |
-| **Resolution** | Avg / median / P90 resolution | Where does handling slow down? |
-| **SLA** | Overall + priority attainment | Which commitments are at risk? |
+| **Resolution** | Avg / median / P90 resolution | Where does case handling slow down? |
+| **SLA** | Overall + priority attainment | Which service commitments are at risk? |
 | **Customer** | CSAT + low-CSAT rate | Where is customer experience weakest? |
-| **Complexity** | Escalation + reopen rate | Which cases create repeat work? |
-| **Root cause** | Priority + issue type | Which segments need attention? |
+| **Complexity** | Escalation + reopen rate | Which cases create repeat workload? |
+| **Backlog** | Open/pending aging buckets | Which unresolved cases are becoming risky? |
+| **Business impact** | Scenario workload/cost | What could an intervention change under stated assumptions? |
+
+## Decision Framework
+
+The project separates four layers that are often mixed together in weak analytics work:
+
+1. **Observation** — what the data shows.
+2. **Association** — which variables move together or differ across groups.
+3. **Scenario** — what could happen under explicit assumptions.
+4. **Decision** — what should be investigated or tested next.
+
+The dashboard deliberately avoids presenting synthetic associations as causal findings or scenario savings as actual financial results.
 
 ## Visual Analysis
 
@@ -68,13 +81,17 @@ Synthetic Support Data
         ↓
 Validation & Cleaning
         ↓
-KPI Calculation → P90 Service Metrics
+KPI Calculation → Mean / Median / P90
         ↓
-SLA / CSAT Analysis → Escalation & Reopen Segmentation
+SLA / CSAT Analysis → Segment Signals
+        ↓
+Backlog Aging → Operational Risk
+        ↓
+Scenario Impact → Explicit Assumptions
         ↓
 SQL + Visual Reporting
         ↓
-Operational Decision Framework
+Investigation / Decision Framework
 ```
 
 ## What This Demonstrates
@@ -85,9 +102,13 @@ Operational Decision Framework
 
 **Segmentation** — channel, priority, issue type, team, and month.
 
-**Root-cause analysis** — escalation and reopen concentration.
+**Operational risk** — escalation, reopen, and backlog-aging analysis.
 
-**Business communication** — `Demand → service → customer outcome → root cause → operational action`.
+**Statistical discipline** — observed associations are distinguished from causal claims; minimum-volume thresholds reduce overinterpretation of tiny segments.
+
+**Business scenarios** — hypothetical cost/workload impact is driven by user-supplied assumptions and clearly labeled as scenario analysis.
+
+**Business communication** — `Observation → evidence → association → scenario → next investigation`.
 
 ## Tech Stack
 
@@ -108,17 +129,21 @@ pytest -q
 
 | Folder | Purpose |
 |---|---|
-| `app.py` | Interactive Streamlit dashboard |
+| `app.py` | Interactive decision-oriented dashboard |
 | `reports/` | Executive support interpretation |
 | `visualizations/` | Recruiter-visible charts |
 | `sql/` | Reusable operational queries |
-| `src/` | Data generation and analytics pipeline |
+| `src/` | Data generation, cleaning, analytics, and decision metrics |
 | `tests/` | Automated validation |
 | `.github/workflows/` | CI quality checks |
 
-## Data Integrity
+## Data Integrity & Limitations
 
 The dataset is **synthetic** and exists solely for portfolio demonstration. It contains no private customer records, employer data, or production support information. Results demonstrate analytical methodology rather than real-company performance.
+
+The synthetic generator intentionally creates service relationships such as priority/channel effects. Therefore, relationships observed in the generated data should be treated as **demonstrations of analytical technique**, not discoveries about real customer behavior.
+
+Capacity and financial impact are not measured from real agent payroll or staffing records. Any cost/workload figures in the dashboard are scenario estimates based on user-entered assumptions.
 
 ## Portfolio
 
@@ -126,4 +151,4 @@ Part of a three-project analytics portfolio:
 
 - **Macro Market Intelligence** — economic and market context
 - **Trading Risk & Performance Analytics** — financial risk and performance
-- **Customer Support Analytics** — business and operations analytics
+- **Customer Support Intelligence** — business and operations analytics
