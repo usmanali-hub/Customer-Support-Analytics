@@ -2,11 +2,22 @@
 
 ## Support operations → measurable decisions
 
-A reproducible business analytics project that evaluates customer-support operations through **Python, SQL, KPI analysis, service-level metrics, segmentation, and visualization**.
+A recruiter-ready, reproducible business analytics project that evaluates customer-support operations through **Python, SQL, KPI analysis, service-level metrics, segmentation, and visualization**.
 
-### Why this project matters
+> **Portfolio focus:** connecting workload, service performance, customer experience, and operational complexity into actionable questions.
 
-The analysis goes beyond ticket counts. It connects **demand → response → resolution → escalation → customer satisfaction** to identify where an operations team should investigate or improve.
+### Analyst Snapshot
+
+| Capability | Demonstrated here |
+|---|---|
+| Data preparation | Validation, cleaning, type handling |
+| KPI analysis | Volume, SLA, response, resolution, CSAT |
+| Service analytics | Average, median, and P90 metrics |
+| Segmentation | Channel, priority, issue type, team, month |
+| Root-cause analysis | Escalation and reopen concentration |
+| SQL | Reusable operational analysis queries |
+| Communication | Executive support dashboard and decision framework |
+| Reproducibility | Scripted pipeline + tests + GitHub Actions |
 
 ## Business Questions
 
@@ -17,6 +28,14 @@ The analysis goes beyond ticket counts. It connects **demand → response → re
 - Which teams or channels show weaker operational performance?
 - How does SLA performance relate to CSAT?
 - Which issue categories should receive operational attention first?
+
+## Executive Dashboard
+
+See the recruiter-facing interpretation layer: **[Executive Support Dashboard](reports/executive_dashboard.md)**.
+
+The dashboard follows:
+
+**Demand → service → customer → complexity → root cause → action**
 
 ## Analytical Workflow
 
@@ -46,7 +65,7 @@ P90 metrics are included deliberately because averages can hide long-running cus
 
 ## Tech Stack
 
-**Python · pandas · NumPy · SQL · Matplotlib · Git/GitHub · GitHub Actions**
+**Python · pandas · NumPy · SQL · Matplotlib · Git/GitHub · GitHub Actions · pytest**
 
 ## Repository Structure
 
@@ -57,6 +76,7 @@ P90 metrics are included deliberately because averages can hide long-running cus
 ├── reports/              # KPI and executive outputs
 ├── sql/                  # Operational analysis queries
 ├── src/                  # Generation, cleaning, analysis, visualization
+├── tests/                # Automated analytical checks
 ├── visualizations/       # Chart documentation
 ├── .github/workflows/    # Automated quality checks
 ├── README.md
@@ -71,9 +91,10 @@ python src/generate_data.py
 python src/clean_data.py
 python src/support_analysis.py
 python src/create_visualizations.py
+pytest -q
 ```
 
-Generated CSV and PNG outputs are intentionally excluded from Git. GitHub Actions runs Python compilation checks on pushes and pull requests.
+Generated CSV and PNG outputs are intentionally excluded from Git. GitHub Actions runs Python compilation and analytical tests on pushes and pull requests.
 
 ## Operational Decision Framework
 
@@ -90,3 +111,11 @@ Generated CSV and PNG outputs are intentionally excluded from Git. GitHub Action
 ## Data Integrity
 
 The dataset is **synthetic** and exists solely for portfolio demonstration. It contains no private customer records, employer data, or production support information. Results should be interpreted as an analytical demonstration rather than claims about a real support organization.
+
+## Portfolio
+
+Part of a three-project Data Analyst portfolio:
+
+- **Macro Market Intelligence** — economic and market context
+- **Trading Risk & Performance Analytics** — financial risk and performance
+- **Customer Support Analytics** — business and operations analytics
