@@ -1,8 +1,8 @@
-# Executive Support Dashboard — Customer Support Analytics
+# Executive Support Intelligence — Customer Support Analytics
 
-> **Support operations → measurable decisions**
+> **Support operations → evidence → scenario → next decision**
 
-This is the recruiter-facing entry point for the analytical output. Charts are generated reproducibly from the synthetic support dataset.
+This is the recruiter-facing interpretation layer for the analytical output. The project uses fixed-seed synthetic support data, so findings demonstrate methodology rather than real-company performance.
 
 ## Executive View
 
@@ -11,33 +11,43 @@ This is the recruiter-facing entry point for the analytical output. Charts are g
 | Demand | Ticket volume / monthly trend | Where is workload concentrated? |
 | Responsiveness | Average / median / P90 first response | Are long-tail cases hidden by averages? |
 | Resolution | Average / median / P90 resolution | Where does case handling slow down? |
-| SLA | Overall / high-priority attainment | Which service commitments are at risk? |
+| SLA | Overall / priority attainment | Which service commitments are at risk? |
 | Customer | CSAT / low-CSAT rate | Where is customer experience weakest? |
 | Complexity | Escalation / reopen rate | Which cases create repeat workload? |
-| Root cause | Priority + issue type | Which operational segments deserve attention? |
+| Backlog | Open/pending age buckets | Which unresolved cases need attention? |
+| Scenario | Escalation reduction × assumed cost | What could change under explicit assumptions? |
 
-## Generated Visuals
+## Analytical Discipline
 
-Running `src/create_visualizations.py` creates:
+The project separates:
 
-- `monthly_ticket_volume.png` — workload trend
-- `sla_by_priority.png` — SLA attainment by priority
-- `csat_by_channel.png` — customer outcome by support channel
-- `resolution_by_issue.png` — median resolution time by issue type
+**Observation** — a measurable pattern in the data.
+
+**Association** — a relationship worth investigating, not proof of causality.
+
+**Scenario** — a hypothetical calculation driven by explicit assumptions.
+
+**Decision** — the next operational question or experiment, rather than an unsupported recommendation.
+
+For example, if missed-SLA tickets show lower CSAT, the correct conclusion is that the two measures are associated in this dataset. It is not evidence that changing SLA performance alone will cause a particular CSAT improvement.
 
 ## Operational Interpretation
 
-1. Start with workload concentration.
-2. Compare average, median, and P90 service metrics.
+1. Start with workload concentration and trend.
+2. Compare mean, median, and P90 service metrics.
 3. Check SLA attainment, especially for high-priority cases.
-4. Compare CSAT with SLA status.
-5. Drill into issue types and priorities with elevated escalation or reopen rates.
-6. Prioritize high-volume segments with measurable service or customer impact.
+4. Drill into issue/channel/team segments with meaningful volume.
+5. Compare CSAT with SLA status while controlling for obvious segment differences where possible.
+6. Review escalation, reopen, and backlog-aging signals for repeat workload.
+7. Use scenario analysis only with clearly stated assumptions.
+8. Recommend an investigation or controlled operational change before claiming causal impact.
 
-## Data Integrity
+## Synthetic Data Guardrails
 
-- The dataset is synthetic.
+- The dataset is synthetic and fixed-seed.
+- Some relationships are intentionally simulated by the generator.
 - No private customer, employer, or production support data is used.
+- Scenario costs are assumptions, not measured financial results.
 - Results demonstrate analytical methodology rather than real-company performance.
 
 ## Reproduce
@@ -48,6 +58,7 @@ python src/generate_data.py
 python src/clean_data.py
 python src/support_analysis.py
 python src/create_visualizations.py
+pytest -q
 ```
 
-**Interview framing:** `Demand → service → customer outcome → root cause → operational action.`
+**Interview framing:** `Observation → evidence → association → scenario → next investigation.`
