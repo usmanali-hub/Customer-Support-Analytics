@@ -6,7 +6,23 @@ A recruiter-ready, reproducible business analytics project that evaluates custom
 
 > **Portfolio focus:** connecting workload, service performance, customer experience, and operational complexity into actionable questions.
 
-### Analyst Snapshot
+## Executive Dashboard
+
+See the recruiter-facing interpretation layer: **[Executive Support Dashboard](reports/executive_dashboard.md)**.
+
+### Visual Analysis
+
+![Monthly Support Ticket Volume](visualizations/monthly_ticket_volume.svg)
+
+![SLA Attainment by Priority](visualizations/sla_by_priority.svg)
+
+![Average CSAT by Channel](visualizations/csat_by_channel.svg)
+
+![Median Resolution Time by Issue Type](visualizations/resolution_by_issue.svg)
+
+These charts are generated from the project's fixed-seed synthetic support dataset and committed as SVG so they render directly on GitHub.
+
+## Analyst Snapshot
 
 | Capability | Demonstrated here |
 |---|---|
@@ -29,14 +45,6 @@ A recruiter-ready, reproducible business analytics project that evaluates custom
 - How does SLA performance relate to CSAT?
 - Which issue categories should receive operational attention first?
 
-## Executive Dashboard
-
-See the recruiter-facing interpretation layer: **[Executive Support Dashboard](reports/executive_dashboard.md)**.
-
-The dashboard follows:
-
-**Demand → service → customer → complexity → root cause → action**
-
 ## Analytical Workflow
 
 ```text
@@ -49,39 +57,9 @@ SLA / CSAT Analysis → Escalation Root-Cause Segmentation
 SQL → Visual Reporting → Operational Decision Framework
 ```
 
-## Advanced Analytics
-
-| Area | Metrics |
-|---|---|
-| Demand | Ticket volume, monthly trend, segmentation |
-| Service | Average/median/P90 first response and resolution |
-| SLA | Overall and high-priority SLA attainment |
-| Customer | Average CSAT, low-CSAT rate |
-| Operations | Escalation rate, reopen rate |
-| Root cause | Escalation by priority and issue type |
-| Relationship | CSAT grouped by SLA status |
-
-P90 metrics are included deliberately because averages can hide long-running customer cases.
-
 ## Tech Stack
 
 **Python · pandas · NumPy · SQL · Matplotlib · Git/GitHub · GitHub Actions · pytest**
-
-## Repository Structure
-
-```text
-├── data/                 # Synthetic dataset documentation
-├── docs/                 # Methodology, dictionary, decision framework
-├── notebooks/            # Analytical walkthrough
-├── reports/              # KPI and executive outputs
-├── sql/                  # Operational analysis queries
-├── src/                  # Generation, cleaning, analysis, visualization
-├── tests/                # Automated analytical checks
-├── visualizations/       # Chart documentation
-├── .github/workflows/    # Automated quality checks
-├── README.md
-└── requirements.txt
-```
 
 ## Reproducibility
 
@@ -94,19 +72,7 @@ python src/create_visualizations.py
 pytest -q
 ```
 
-Generated CSV and PNG outputs are intentionally excluded from Git. GitHub Actions runs Python compilation and analytical tests on pushes and pull requests.
-
-## Operational Decision Framework
-
-**Demand:** Find where workload is concentrated.
-
-**Service:** Compare SLA attainment with P90 response and resolution times.
-
-**Customer:** Compare CSAT and low-CSAT rates alongside service outcomes.
-
-**Complexity:** Identify issue types and priorities with elevated escalation or reopen rates.
-
-**Action:** Prioritize high-volume segments with measurable service or customer-impact problems.
+The synthetic dataset uses a fixed random seed. The visualization script now generates SVG outputs that are versioned in Git so the portfolio's visual layer is visible on GitHub.
 
 ## Data Integrity
 
