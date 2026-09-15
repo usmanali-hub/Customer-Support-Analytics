@@ -1,10 +1,10 @@
 # Visualizations
 
-Running `python src/create_visualizations.py` creates:
+The portfolio charts are committed as SVG so they render directly on GitHub.
 
-- `monthly_ticket_volume.png` — demand trend
-- `sla_by_priority.png` — SLA attainment by priority
-- `csat_by_channel.png` — customer satisfaction by channel
-- `resolution_by_issue.png` — median resolution time by issue type
+- `monthly_ticket_volume.svg` — demand trend
+- `sla_by_priority.svg` — SLA attainment by priority
+- `csat_by_channel.svg` — customer satisfaction by channel
+- `resolution_by_issue.svg` — median resolution time by issue type
 
-PNG outputs are ignored by Git and can be regenerated from the synthetic dataset.
+Regenerate them with `python src/create_visualizations.py` after generating and cleaning the fixed-seed synthetic dataset.
